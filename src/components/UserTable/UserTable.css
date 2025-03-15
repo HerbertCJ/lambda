@@ -40,6 +40,10 @@ table td {
   text-align: center;
 }
 
+.empty-table {
+  height: 190px;
+}
+
 .actions {
   display: flex;
   gap: 0.5rem;

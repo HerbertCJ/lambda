@@ -17,6 +17,13 @@ function UserTable({ data, handleDeleteUser, onChange }: UserTableProps) {
         </tr>
       </thead>
       <tbody>
+        {data.length === 0 && (
+          <tr>
+            <td colSpan={3} className="empty-table">
+              No users found
+            </td>
+          </tr>
+        )}
         {data.map((user: UserProps) => (
           <tr key={user.email}>
             <td>{user.name}</td>
