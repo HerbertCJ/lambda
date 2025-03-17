@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
+import api from "@/api";
 import UserTable from "@/components/UserTable";
 import UserForm from "@/components/UserForm";
 
 import { UserProps } from "./User.type";
 import "./User.css";
-
-const apiUrl = import.meta.env.VITE_API_URL;
 
 function User() {
   const [data, setData] = useState([]);
@@ -22,9 +22,9 @@ function User() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`${apiUrl}/users`);
-      const data = await response.json();
-      setData(data.data);
+      const response = await api.get("/users");
+      const { data } = response.data;
+      setData(data);
     } catch (error) {
       console.error(error);
     }
@@ -32,9 +32,7 @@ function User() {
 
   const handleDeleteUser = async (email: string) => {
     try {
-      await fetch(`${apiUrl}/users/${email}`, {
-        method: "DELETE",
-      });
+      await api.delete(`/users/${email}`);
       const newData = data.filter((user: UserProps) => user.email !== email);
       setData(newData);
     } catch (error) {
@@ -44,13 +42,7 @@ function User() {
 
   const createUser = async () => {
     try {
-      await fetch(`${apiUrl}/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+      await api.post(`/users`, user);
       await fetchUsers();
     } catch (error) {
       console.error(error);
@@ -59,13 +51,7 @@ function User() {
 
   const updateUser = async () => {
     try {
-      await fetch(`${apiUrl}/users/${user.email}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+      await api.patch(`/users/${user.email}`, user);
       await fetchUsers();
     } catch (error) {
       console.error(error);
@@ -74,6 +60,7 @@ function User() {
 
   return (
     <div className="wrapper">
+      <Link to="/home">Home</Link>
       <UserTable
         data={data}
         handleDeleteUser={handleDeleteUser}

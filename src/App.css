@@ -1,0 +1,22 @@
+.buttons-login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.buttons-login-wrapper button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: blueviolet;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.buttons-login-wrapper button:hover {
+  background-color: darkviolet;
+}
