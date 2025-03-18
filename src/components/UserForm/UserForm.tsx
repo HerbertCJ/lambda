@@ -41,6 +41,9 @@ function UserForm({ user, onChange, createUser, updateUser }: UserFormProps) {
           value={user.name}
           name="name"
           id="name"
+          required
+          minLength={3}
+          maxLength={20}
           onChange={(e) => handleChange(e.target)}
         />
         <label htmlFor="email">Email</label>
@@ -50,6 +53,7 @@ function UserForm({ user, onChange, createUser, updateUser }: UserFormProps) {
           name="email"
           id="email"
           disabled={user.isEditing}
+          required
           onChange={(e) => handleChange(e.target)}
         />
         <button type="submit">{user.isEditing ? "Update" : "Create"}</button>
